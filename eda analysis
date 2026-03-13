@@ -1,0 +1,103 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load dataset
+df = pd.read_csv("cleaned_student_dataset.csv")
+
+# -----------------------------
+# 1. Basic Dataset Information
+# -----------------------------
+print("Dataset Shape:", df.shape)
+print("\nColumns:")
+print(df.columns)
+
+print("\nData Types:")
+print(df.dtypes)
+
+print("\nMissing Values:")
+print(df.isnull().sum())
+
+print("\nStatistical Summary:")
+print(df.describe())
+
+
+# -----------------------------
+# 2. Age Distribution
+# -----------------------------
+plt.figure()
+df['age'].hist(bins=20)
+plt.title("Age Distribution of Students")
+plt.xlabel("Age")
+plt.ylabel("Frequency")
+plt.show()
+
+
+# -----------------------------
+# 3. Attendance Rate Distribution
+# -----------------------------
+plt.figure()
+df['attendance_rate'].hist(bins=20)
+plt.title("Attendance Rate Distribution")
+plt.xlabel("Attendance Rate")
+plt.ylabel("Frequency")
+plt.show()
+
+
+# -----------------------------
+# 4. Assignment Score Distribution
+# -----------------------------
+plt.figure()
+df['assignment_avg_score'].hist(bins=20)
+plt.title("Assignment Average Score Distribution")
+plt.xlabel("Assignment Avg Score")
+plt.ylabel("Frequency")
+plt.show()
+
+
+# -----------------------------
+# 5. Exam Score Distribution
+# -----------------------------
+plt.figure()
+df['exam_avg_score'].hist(bins=20)
+plt.title("Exam Average Score Distribution")
+plt.xlabel("Exam Avg Score")
+plt.ylabel("Frequency")
+plt.show()
+
+
+# -----------------------------
+# 6. At Risk Student Count
+# -----------------------------
+plt.figure()
+df['at_risk'].value_counts().plot(kind='bar')
+plt.title("At-Risk Student Distribution")
+plt.xlabel("At Risk (0 = No, 1 = Yes)")
+plt.ylabel("Count")
+plt.show()
+
+
+# -----------------------------
+# 7. Performance Label Distribution
+# -----------------------------
+plt.figure()
+df['performance_label'].value_counts().sort_index().plot(kind='bar')
+plt.title("Student Performance Label Distribution")
+plt.xlabel("Performance Label")
+plt.ylabel("Count")
+plt.show()
+
+
+# -----------------------------
+# 8. Correlation Matrix
+# -----------------------------
+plt.figure()
+corr = df.corr(numeric_only=True)
+
+sns.heatmap(corr, annot=False)
+plt.title("Correlation Matrix")
+plt.show()
+
+print("\nCorrelation Matrix:")
+print(corr)
+
